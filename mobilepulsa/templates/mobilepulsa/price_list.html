@@ -1,48 +1,51 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
 
 {% block title %}Price List{% endblock title %}
 
 {% block content %}
-
-<div class="row">
-  <div class="col col-12">
-    <div class="card my-4">
-      <div class="card-body">
-        <h5 class="card-title">Daftar Harga</h5>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col"></th>
-              <th scope="col">Kode</th>
-              <th scope="col">Operator</th>
-              <th scope="col">Nominal</th>
-              <th scope="col">Keterangan</th>
-              <th scope="col">Harga</th>
-              <th scope="col">Tipe</th>
-              <th scope="col">Masa aktif</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for data in datas %}
-            <tr>
-              <td class="serial">{{ forloop.counter }}</td>
-              <td><img src="{{ data.icon_url }}" alt=""></td>
-              <td>{{ data.pulsa_code }}</td>
-              <td>{{ data.pulsa_op }}</td>
-              <td>{{ data.pulsa_nominal }}</td>
-              <td>{{ data.pulsa_details }}</td>
-              <td>{{ data.pulsa_price|floatformat:2 }}</td>
-              <td>{{ data.pulsa_type }}</td>
-              <td>{{ data.masaaktif }}</td>
-              <td>{{ data.status }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+<h5 class="my-4">Daftar Harga</h5>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+<br>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Kode</th>
+      <th scope="col">Nominal</th>
+      <th scope="col">Keterangan</th>
+      <th scope="col">Harga</th>
+      <th scope="col">Masa aktif</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody id="myTable">
+    {% for data in datas %}
+    <tr>
+      <td><img src="{{ data.icon_url }}" alt=""></td>
+      <td>{{ data.pulsa_code }}</td>
+      <td>{{ data.pulsa_nominal }}</td>
+      <td>{{ data.pulsa_details }}</td>
+      <td>{{ data.pulsa_price|intcomma }}</td>
+      <td>{{ data.masaaktif }}</td>
+      <td>{{ data.status }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock content %}
+
+{% block script %}
+<script>
+  $(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
+  });
+</script>
+
+{% endblock script %}
