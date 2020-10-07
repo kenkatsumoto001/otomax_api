@@ -20,7 +20,7 @@ def price_list():
         \"sign\"     : \"""" + signature + """\"
     }"""
 
-    url = "https://testprepaid.mobilepulsa.net/v1/legacy/index/data/telkomsel"
+    url = "https://testprepaid.mobilepulsa.net/v1/legacy/index/"
     headers = {'content-type': 'application/json'}
 
     data_request = requests.post(

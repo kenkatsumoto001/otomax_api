@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class MobilepulsaPriceList(models.Model):
+class PriceList(models.Model):
     status = models.CharField(max_length=50)
     icon_url = models.CharField(max_length=50)
     pulsa_code = models.CharField(max_length=50)
