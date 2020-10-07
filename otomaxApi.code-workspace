@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.pythonPath": "/home/ias/.local/share/virtualenvs/otomax_api-W1FCZyW7/bin/python"
+	}
+}
